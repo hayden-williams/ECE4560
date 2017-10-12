@@ -27,8 +27,7 @@ class GoForward():
 
 		rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
 		# may need rospy.spin(); 
-		rospy.spin();
-
+		
 		
 		# Create a publisher which can "talk" to TurtleBot and tell it to move
 		# Tip: You may need to change cmd_vel_mux/input/navi to /cmd_vel if you're not using TurtleBot2
