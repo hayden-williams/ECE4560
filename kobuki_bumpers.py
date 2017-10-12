@@ -81,16 +81,16 @@ class kobuki_button_bumper():
 	# Code add Begin
 
 	def BumperEventCallback(self,data):
-	    if ( data.state == BumperEvent.RELEASED ) :
+	    if ( data.state != BumperEvent.PRESSED ) :
 		state = "released"
 	    else:
 		state = "pressed"  
-	    if ( data.bumper == BumperEvent.Bumper0 ) :
+	    if ( data.bumper == BumperEvent.LEFT ) :
 		bumper = "B0"
-	    elif ( data.bumper == BumperEvent.Bumper1 ) :
+	    elif ( data.bumper == BumperEvent.CENTER ) :
 		bumper = "B1"
 	    else:
-		bumper = "B2"
+		bumper = "B2" #RIGHT
 	    rospy.loginfo("Bumper %s was %s."%(bumper, state))
 	# Code add End
 
