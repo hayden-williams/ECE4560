@@ -39,6 +39,8 @@
 
 # Monitor the kobuki's button status
 
+# The button code was already coded, We (Edgardo Marchand and Stephen Williams) added the bumper functionality
+
 import roslib
 import rospy
 from kobuki_msgs.msg import ButtonEvent
@@ -53,7 +55,10 @@ class kobuki_button_bumper():
 
 		#monitor kobuki's button and bumper events
 		rospy.Subscriber("/mobile_base/events/button",ButtonEvent,self.ButtonEventCallback)
+
+		# Code add Begin
 		rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
+		# Code add End
 
 		#rospy.spin() tells the program to not exit until you press ctrl + c.  If this wasn't there... it'd subscribe and then immediatly exit (therefore stop "listening" to the thread).
 		rospy.spin();
@@ -73,6 +78,8 @@ class kobuki_button_bumper():
 		button = "B2"
 	    rospy.loginfo("Button %s was %s."%(button, state))
 
+	# Code add Begin
+
 	def BumperEventCallback(self,data):
 	    if ( data.state == BumperEvent.RELEASED ) :
 		state = "released"
@@ -85,7 +92,7 @@ class kobuki_button_bumper():
 	    else:
 		bumper = "B2"
 	    rospy.loginfo("Bumper %s was %s."%(bumper, state))
-	
+	# Code add End
 
 
 if __name__ == '__main__':
