@@ -86,11 +86,11 @@ class kobuki_button_bumper():
 	    else:
 		state = "pressed"  
 	    if ( data.bumper == BumperEvent.LEFT ) :
-		bumper = "B0"
+		bumper = "LEFT"
 	    elif ( data.bumper == BumperEvent.CENTER ) :
-		bumper = "B1"
+		bumper = "CENTER"
 	    else:
-		bumper = "B2" #RIGHT
+		bumper = "RIGHT"
 	    rospy.loginfo("Bumper %s was %s."%(bumper, state))
 	# Code add End
 
