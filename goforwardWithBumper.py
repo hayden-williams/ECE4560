@@ -25,9 +25,45 @@ class GoForward():
 		rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
 		# may need rospy.spin(); 
 
-	stateMachine = 0
-	counter = 0
+		stateMachine = 0
+		counter = 0
 
+		
+
+		
+		# Create a publisher which can "talk" to TurtleBot and tell it to move
+		# Tip: You may need to change cmd_vel_mux/input/navi to /cmd_vel if you're not using TurtleBot2
+		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
+	 
+		#TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
+		r = rospy.Rate(10);
+
+		# Twist is a datatype for velocity
+		move_cmd = Twist()
+		# let's go forward at 0.2 m/s
+		move_cmd.linear.x = 0.2
+		# let's turn at 0 radians/s
+		move_cmd.angular.z = 0
+
+
+		# as long as you haven't ctrl + c keeping doing...
+		while not rospy.is_shutdown():
+
+			if (stateMachine == 0):
+				move_cmd.linear.x = 0.2
+			elif (stateMachine == 1):
+				move_cmd.linear.x = 0.0
+			elif (stateMachine == 2):
+				move_cmd.linear.x = 0.0
+				if(counter>=20):
+					stateMachine = 0 # since sleep waits for 0.1 second, counter = 20 is 2 seconds (20*0.1=2)
+				else:
+					counter = counter + 1
+			# publish the velocity
+			self.cmd_vel.publish(move_cmd)
+			# wait for 0.1 seconds (10 HZ) and publish again
+			r.sleep()
+			
 	def BumperEventCallback(self,data):
 		if ( data.state != BumperEvent.PRESSED ) :
 			state = "released"
@@ -44,42 +80,7 @@ class GoForward():
 			bumper = "CENTER"
 		else:
 			bumper = "RIGHT"
-		rospy.loginfo("Bumper %s was %s."%(bumper, state))
-
-	
-	# Create a publisher which can "talk" to TurtleBot and tell it to move
-	# Tip: You may need to change cmd_vel_mux/input/navi to /cmd_vel if you're not using TurtleBot2
-	self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
- 
-	#TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
-	r = rospy.Rate(10);
-
-	# Twist is a datatype for velocity
-	move_cmd = Twist()
-	# let's go forward at 0.2 m/s
-	move_cmd.linear.x = 0.2
-	# let's turn at 0 radians/s
-	move_cmd.angular.z = 0
-
-
-	# as long as you haven't ctrl + c keeping doing...
-	while not rospy.is_shutdown():
-
-		if (stateMachine == 0):
-			move_cmd.linear.x = 0.2
-		elif (stateMachine == 1):
-			move_cmd.linear.x = 0.0
-		elif (stateMachine == 2):
-			move_cmd.linear.x = 0.0
-			if(counter>=20):
-				stateMachine = 0 # since sleep waits for 0.1 second, counter = 20 is 2 seconds (20*0.1=2)
-			else:
-				counter = counter + 1
-		# publish the velocity
-		self.cmd_vel.publish(move_cmd)
-		# wait for 0.1 seconds (10 HZ) and publish again
-		r.sleep()
-						
+		rospy.loginfo("Bumper %s was %s."%(bumper, state))			
 		
 	def shutdown(self):
 		# stop turtlebot
