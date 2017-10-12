@@ -25,8 +25,8 @@ class GoForward():
 		rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
 		# may need rospy.spin(); 
 
-		stateMachine = 0
-		counter = 0
+	stateMachine = 0
+	counter = 0
 
 		
 
