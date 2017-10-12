@@ -46,6 +46,7 @@ class GoForward():
 		rospy.loginfo("GoForward looping.")
 		# as long as you haven't ctrl + c keeping doing...
 		while not rospy.is_shutdown():
+		rospy.loginfo("GoForward in loop.")
 
 			if (stateMachine == 0):
 				move_cmd.linear.x = 0.2
