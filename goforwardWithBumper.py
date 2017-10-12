@@ -14,7 +14,7 @@ from kobuki_msgs.msg import BumperEvent
 class GoForward():
 	stateMachine = 0
 	counter = 0
-	
+
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('GoForward', anonymous=False)
@@ -61,6 +61,8 @@ class GoForward():
 			self.cmd_vel.publish(move_cmd)
 			# wait for 0.1 seconds (10 HZ) and publish again
 			r.sleep()
+
+		rospy.spin();
 			
 	def BumperEventCallback(self,data):
 		if ( data.state != BumperEvent.PRESSED ) :
