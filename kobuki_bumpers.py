@@ -85,9 +85,9 @@ class kobuki_button_bumper():
 		state = "released"
 	    else:
 		state = "pressed"  
-	    if ( data.button == BumperEvent.Bumper0 ) :
+	    if ( data.bumper == BumperEvent.Bumper0 ) :
 		bumper = "B0"
-	    elif ( data.button == BumperEvent.Bumper1 ) :
+	    elif ( data.bumper == BumperEvent.Bumper1 ) :
 		bumper = "B1"
 	    else:
 		bumper = "B2"
