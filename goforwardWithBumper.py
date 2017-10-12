@@ -12,6 +12,9 @@ from geometry_msgs.msg import Twist
 from kobuki_msgs.msg import BumperEvent
 
 class GoForward():
+	stateMachine = 0
+	counter = 0
+	
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('GoForward', anonymous=False)
@@ -24,11 +27,6 @@ class GoForward():
 
 		rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
 		# may need rospy.spin(); 
-
-	stateMachine = 0
-	counter = 0
-
-		
 
 		
 		# Create a publisher which can "talk" to TurtleBot and tell it to move
