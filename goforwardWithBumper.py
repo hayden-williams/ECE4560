@@ -27,6 +27,7 @@ class GoForward():
 
 		rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
 		# may need rospy.spin(); 
+		rospy.spin();
 
 		
 		# Create a publisher which can "talk" to TurtleBot and tell it to move
@@ -62,7 +63,7 @@ class GoForward():
 			# wait for 0.1 seconds (10 HZ) and publish again
 			r.sleep()
 
-		rospy.spin();
+
 			
 	def BumperEventCallback(self,data):
 		if ( data.state != BumperEvent.PRESSED ) :
