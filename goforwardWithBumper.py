@@ -27,7 +27,7 @@ class GoForward():
 
 		rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
 		# may need rospy.spin(); 
-		
+
 		
 		# Create a publisher which can "talk" to TurtleBot and tell it to move
 		# Tip: You may need to change cmd_vel_mux/input/navi to /cmd_vel if you're not using TurtleBot2
@@ -43,7 +43,7 @@ class GoForward():
 		# let's turn at 0 radians/s
 		move_cmd.angular.z = 0
 
-
+		rospy.loginfo("GoForward looping.")
 		# as long as you haven't ctrl + c keeping doing...
 		while not rospy.is_shutdown():
 
