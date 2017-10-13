@@ -48,16 +48,16 @@ class GoForward():
 		while not rospy.is_shutdown():
 		rospy.loginfo("GoForward in loop.")
 
-			if (stateMachine == 0):
+			if (self.stateMachine == 0):
 				move_cmd.linear.x = 0.2
-			elif (stateMachine == 1):
+			elif (self.stateMachine == 1):
 				move_cmd.linear.x = 0.0
-			elif (stateMachine == 2):
+			elif (self.stateMachine == 2):
 				move_cmd.linear.x = 0.0
-				if(counter>=20):
-					stateMachine = 0 # since sleep waits for 0.1 second, counter = 20 is 2 seconds (20*0.1=2)
+				if(self.counter>=20):
+					self.stateMachine = 0 # since sleep waits for 0.1 second, counter = 20 is 2 seconds (20*0.1=2)
 				else:
-					counter = counter + 1
+					self.counter = self.counter + 1
 			# publish the velocity
 			self.cmd_vel.publish(move_cmd)
 			# wait for 0.1 seconds (10 HZ) and publish again
@@ -68,13 +68,13 @@ class GoForward():
 	def BumperEventCallback(self,data):
 		if ( data.state != BumperEvent.PRESSED ) :
 			state = "released"
-			if (stateMachine==1):
-				stateMachine ==2
-				counter = 0
+			if (self.stateMachine==1):
+				self.stateMachine ==2
+				self.counter = 0
 
 		else:
 			state = "pressed"  
-			stateMachine = 1
+			self.stateMachine = 1
 		if ( data.bumper == BumperEvent.LEFT ) :
 			bumper = "LEFT"
 		elif ( data.bumper == BumperEvent.CENTER ) :
