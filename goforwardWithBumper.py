@@ -47,7 +47,7 @@ class GoForward():
 		# as long as you haven't ctrl + c keeping doing...
 		while not rospy.is_shutdown():
 		
-
+			rospy.loginfo("stateMachine %d."%(self.stateMachine))
 			if (self.stateMachine == 0):
 				move_cmd.linear.x = 0.2
 			elif (self.stateMachine == 1):
