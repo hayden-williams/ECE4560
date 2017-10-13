@@ -69,7 +69,7 @@ class GoForward():
 		if ( data.state != BumperEvent.PRESSED ) :
 			state = "released"
 			if (self.stateMachine==1):
-				self.stateMachine ==2
+				self.stateMachine =2
 				self.counter = 0
 
 		else:
