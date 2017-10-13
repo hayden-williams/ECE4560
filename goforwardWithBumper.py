@@ -43,10 +43,10 @@ class GoForward():
 		# let's turn at 0 radians/s
 		move_cmd.angular.z = 0
 
-		rospy.loginfo("GoForward looping.")
+		
 		# as long as you haven't ctrl + c keeping doing...
 		while not rospy.is_shutdown():
-		rospy.loginfo("GoForward in loop.")
+		
 
 			if (self.stateMachine == 0):
 				move_cmd.linear.x = 0.2
