@@ -1,4 +1,6 @@
-
+# Authors: Stephen Hayden Williams and Edgardo Marchand
+# Date Created: 16 Oct 2017
+# Date Revised: 16 Oct 2017
 
 # A very basic TurtleBot script that moves TurtleBot forward, bumper paused the movement for 2 sec. Press CTRL + C to stop.  To run:
 # On TurtleBot:
