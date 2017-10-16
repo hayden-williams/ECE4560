@@ -10,6 +10,7 @@ import rospy
 import roslib
 from geometry_msgs.msg import Twist
 from kobuki_msgs.msg import BumperEvent
+from kobuki_msgs.msg import WheelDropEvent
 
 class GoForward():
 	stateMachine = 0
