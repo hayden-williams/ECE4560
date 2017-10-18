@@ -59,7 +59,7 @@ class GoStraight():
 
 	def Orientation(self,data):
 		quaternion = data.pose.pose.orientation
-		euler = self.tf.transformations.euler_from_quaternion(quaternion)
+		euler = self.TFMessage.transformations.euler_from_quaternion(quaternion)
 		yaw = euler[2]
 		rospy.loginfo("yaw = %f"%(yaw))
 
