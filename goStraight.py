@@ -62,10 +62,11 @@ class GoStraight():
 	def Orientation(self,data):
 		qz = data.pose.pose.orientation.z
 		qw = data.pose.pose.orientation.w
-		thetaZ = qz/sqrt(1-(qw*qw))
+		rospy.loginfo("qz: %f qw: %f"%(qz, qw))
+		#thetaZ = qz/sqrt(1-(qw*qw))
 		#euler = self.tf.transformations.euler_from_quaternion(quaternion)
 		#yaw = euler[2]
-		rospy.loginfo("theta = %f"%(thetaZ))
+		#rospy.loginfo("theta = %f"%(thetaZ))
 
 	def shutdown(self):
 		# stop turtlebot
