@@ -17,7 +17,7 @@ from cmath import *
 #import tf
 
 class GoStraight():
-
+	count = 0
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('GoStraight', anonymous=False)
@@ -63,9 +63,12 @@ class GoStraight():
 		qz = data.pose.pose.orientation.z
 		qw = data.pose.pose.orientation.w
 		current = qw + qz*1j
+		if self.count == 0:
+			desired = qw + qz*1j
+		self.count = 1
 		#desired = 1 + 0*1j
-		thetaDesired = 0
-		desired = cos(thetaDesired)+sin(thetaDesired)*1j
+		#thetaDesired = 0
+		#desired = cos(thetaDesired)+sin(thetaDesired)*1j
 		error = desired/current
 		thetaError = phase(error)
 		#rospy.loginfo("qz: %f qw: %f"%(qz, qw))
