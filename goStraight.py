@@ -12,7 +12,7 @@ import rospy
 import roslib
 from geometry_msgs.msg import Twist#, Pose
 from nav_msgs.msg import Odometry
-from cmath import sqrt
+from cmath import *
 #from tf2_msgs.msg import TFMessage
 #import tf
 
@@ -62,15 +62,16 @@ class GoStraight():
 	def Orientation(self,data):
 		qz = data.pose.pose.orientation.z
 		qw = data.pose.pose.orientation.w
+		current = qz + qw*1j
+		desired = 1 + 0*1j
+		error = desired/current
+		thetaError = phase(error)
 		#rospy.loginfo("qz: %f qw: %f"%(qz, qw))
-		if qw == 1:
-			thetaZ = 0
-		else:
-			thetaZ = qz/sqrt(1-(qw*qw))
+		
 		#thetaZ = qz/sqrt(1-(qw*qw))
 		#euler = self.tf.transformations.euler_from_quaternion(quaternion)
 		#yaw = euler[2]
-		rospy.loginfo("theta = %f"%(thetaZ))
+		rospy.loginfo("theta = %f"%(thetaError))
 
 	def shutdown(self):
 		# stop turtlebot
