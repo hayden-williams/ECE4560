@@ -12,7 +12,7 @@ import rospy
 import roslib
 from geometry_msgs.msg import Twist#, Pose
 from nav_msgs.msg import Odometry
-from tf.msg import *
+from tf2_msgs.msg import TFMess
 
 class GoStraight():
 
@@ -59,7 +59,7 @@ class GoStraight():
 
 	def Orientation(self,data):
 		quaternion = data.pose.pose.orientation
-		euler = tf.transformations.euler_from_quaternion(quaternion)
+		euler = self.tf.transformations.euler_from_quaternion(quaternion)
 		yaw = euler[2]
 		rospy.loginfo("yaw = %f"%(yaw))
 
