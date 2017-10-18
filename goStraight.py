@@ -62,9 +62,9 @@ class GoStraight():
 	def Orientation(self,data):
 		qz = data.pose.pose.orientation.z
 		qw = data.pose.pose.orientation.w
-		current = qw + qz*1j
+		current = qz + qw*1j
 		#desired = 1 + 0*1j
-		desired = 2 + 2*1j
+		desired = 1 + 1*1j
 		error = desired/current
 		thetaError = phase(error)
 		#rospy.loginfo("qz: %f qw: %f"%(qz, qw))
