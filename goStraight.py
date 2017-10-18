@@ -62,7 +62,7 @@ class GoStraight():
 	def Orientation(self,data):
 		qz = data.pose.pose.orientation.z
 		qw = data.pose.pose.orientation.w
-		current = qz + qw*1j
+		current = qw + qz*1j
 		desired = 1 + 0*1j
 		error = desired/current
 		thetaError = phase(error)
