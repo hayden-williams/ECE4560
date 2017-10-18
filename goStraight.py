@@ -64,9 +64,9 @@ class GoStraight():
 		qw = data.pose.pose.orientation.w
 		current = qw + qz*1j
 		if self.desired == 10:
-			self.desired = qw + qz*1j
+			self.desired = (qw + qz*1j)**2
 		else:
-			error = self.desired/current
+			error = self.desired/(current**2)
 			thetaError = phase(error)
 		#desired = 1 + 0*1j
 		#thetaDesired = 0
