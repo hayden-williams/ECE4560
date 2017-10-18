@@ -12,6 +12,7 @@ import rospy
 import roslib
 from geometry_msgs.msg import Twist#, Pose
 from nav_msgs.msg import Odometry
+import cmath
 #from tf2_msgs.msg import TFMessage
 #import tf
 
@@ -59,10 +60,12 @@ class GoStraight():
 			r.sleep()
 
 	def Orientation(self,data):
-		zQuaternion = data.pose.pose.orientation.z
+		qz = data.pose.pose.orientation.z
+		qw = data.pose.pose.orientation.w
+		thetaZ = qz/sqrt(1-qw*qw)
 		#euler = self.tf.transformations.euler_from_quaternion(quaternion)
 		#yaw = euler[2]
-		rospy.loginfo("z = %f"%(zQuaternion))
+		rospy.loginfo("theta = %f"%(thetaZ))
 
 	def shutdown(self):
 		# stop turtlebot
