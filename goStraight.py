@@ -18,6 +18,8 @@ from cmath import *
 
 class GoStraight():
 	desired = 10
+	thetaError = 0
+	kTurn = 1
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('GoStraight', anonymous=False)
@@ -53,7 +55,12 @@ class GoStraight():
 		# as long as you haven't ctrl + c keeping doing...
 		while not rospy.is_shutdown():
 		
-			
+			if self.desired == 10:
+				move_cmd.linear.x = 0.0
+				move_cmd.angular.z = 0
+			else:
+				move_cmd.linear.x = 0.2
+				move_cmd.angular.z = self.kTurn*self.thetaError
 			# publish the velocity
 			self.cmd_vel.publish(move_cmd)
 			# wait for 0.1 seconds (10 HZ) and publish again
@@ -67,7 +74,7 @@ class GoStraight():
 			self.desired = (qw + qz*1j)**2
 		else:
 			error = self.desired/(current**2)
-			thetaError = phase(error)
+			self.thetaError = phase(error)
 		#desired = 1 + 0*1j
 		#thetaDesired = 0
 		#desired = cos(thetaDesired)+sin(thetaDesired)*1j
@@ -78,7 +85,7 @@ class GoStraight():
 		#thetaZ = qz/sqrt(1-(qw*qw))
 		#euler = self.tf.transformations.euler_from_quaternion(quaternion)
 		#yaw = euler[2]
-		rospy.loginfo("theta = %f"%(thetaError))
+		rospy.loginfo("theta = %f"%(self.thetaError))
 
 	def shutdown(self):
 		# stop turtlebot
