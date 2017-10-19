@@ -19,7 +19,7 @@ from cmath import *
 class GoStraight():
 	desired = 10
 	thetaError = 0
-	kTurn = 10
+	kTurn = 5
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('GoStraight', anonymous=False)
