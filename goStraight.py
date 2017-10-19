@@ -59,7 +59,7 @@ class GoStraight():
 				move_cmd.linear.x = 0.0
 				move_cmd.angular.z = 0
 			else:
-				move_cmd.linear.x = 0.5
+				move_cmd.linear.x = 0.2
 				move_cmd.angular.z = self.kTurn*self.thetaError
 			# publish the velocity
 			self.cmd_vel.publish(move_cmd)
