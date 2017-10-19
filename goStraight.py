@@ -19,7 +19,7 @@ from cmath import *
 class GoStraight():
 	desired = 10
 	thetaError = 0
-	kTurn = 25
+	kTurn = 22
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('GoStraight', anonymous=False)
@@ -42,7 +42,7 @@ class GoStraight():
 		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
 	 
 		#TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
-		r = rospy.Rate(10);
+		r = rospy.Rate(20);
 
 		# Twist is a datatype for velocity
 		move_cmd = Twist()
