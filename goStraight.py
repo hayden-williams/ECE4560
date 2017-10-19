@@ -19,7 +19,7 @@ from cmath import *
 class GoStraight():
 	desired = 10
 	thetaError = 0
-	kTurn = 20
+	kTurn = 30
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('GoStraight', anonymous=False)
@@ -59,7 +59,7 @@ class GoStraight():
 				move_cmd.linear.x = 0.0
 				move_cmd.angular.z = 0
 			else:
-				move_cmd.linear.x = 0.2
+				move_cmd.linear.x = 0.5
 				move_cmd.angular.z = self.kTurn*self.thetaError
 			# publish the velocity
 			self.cmd_vel.publish(move_cmd)
