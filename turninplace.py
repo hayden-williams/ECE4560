@@ -21,7 +21,7 @@ class turninplace():
 	thetaError = 0
 	kTurn = 1.5
 	#desiredAngle = -1-1*1j # use complex math
-	desiredAngle = 0+1*1j # use complex math
+	desiredAngle = 0-1*1j # use complex math
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('turninplace', anonymous=False)
