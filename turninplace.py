@@ -20,8 +20,8 @@ class turninplace():
 	zeroAngle = 10 # should never naturally be 10, this was to give bot time to get correct error
 	thetaError = 0
 	kTurn = 1.5
-	#desiredAngle = -1-1*1j # use complex math
-	desiredAngle = 0-1*1j # use complex math, 90 clockwise
+	desiredAngle = -1-1*1j # use complex math, 90+45 clockwise
+	#desiredAngle = 0-1*1j # use complex math, 90 clockwise
 	#desiredAngle = 0+1*1j # use complex math, 90 counterclockwise
 	def __init__(self):
 		# initiliaze
