@@ -20,9 +20,11 @@ class turninplace():
 	zeroAngle = 10 # should never naturally be 10, this was to give bot time to get correct error
 	thetaError = 0
 	kTurn = 1.5
-	desiredAngle = -1-1*1j # use complex math, 90+45 clockwise
+	#desiredAngle = -1-1*1j # use complex math, 90+45 clockwise
 	#desiredAngle = 0-1*1j # use complex math, 90 clockwise
 	#desiredAngle = 0+1*1j # use complex math, 90 counterclockwise
+	# change desirgedAngle from complex to just requesting radians
+	desiredAngle = pi/2
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('turninplace', anonymous=False)
@@ -75,7 +77,7 @@ class turninplace():
 		if self.zeroAngle == 10:
 			self.zeroAngle = (qw + qz*1j)**2
 			# at this point, zeroAngle is our 0
-			self.zeroAngle = self.zeroAngle*self.desiredAngle
+			self.zeroAngle = self.zeroAngle*(cos(self.desiredAngle)+sin(self.desiredAngle)*1j)
 		else:
 			error = self.zeroAngle/(current**2)
 			self.thetaError = phase(error) # radians from 0, -pi to pi
