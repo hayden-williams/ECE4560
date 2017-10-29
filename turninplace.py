@@ -19,7 +19,7 @@ from cmath import *
 class turninplace():
 	zeroAngle = 10 # should never naturally be 10, this was to give bot time to get correct error
 	thetaError = 0
-	kTurn = 2.5
+	kTurn = 1.5
 	desiredAngle = -1-1*1j # use complex math
 	def __init__(self):
 		# initiliaze
@@ -71,9 +71,9 @@ class turninplace():
 		qw = data.pose.pose.orientation.w
 		current = qw + qz*1j
 		if self.zeroAngle == 10:
-			#self.zeroAngle = (qw + qz*1j)**2
+			self.zeroAngle = (qw + qz*1j)**2
 			# at this point, zeroAngle is our 0
-			self.zeroAngle = (qw + qz*1j + self.desiredAngle)**2
+			self.zeroAngle = self.zeroAngle + (self.desiredAngle)**2
 		else:
 			error = self.zeroAngle/(current**2)
 			self.thetaError = phase(error) # radians from 0, -pi to pi
