@@ -20,7 +20,7 @@ class turninplace():
 	zeroAngle = 10 # should never naturally be 10, this was to give bot time to get correct error
 	thetaError = 0
 	kTurn = 5
-	desiredAngle = 0+1j # use complex math
+	desiredAngle = 0+1*1j # use complex math
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('turninplace', anonymous=False)
@@ -90,6 +90,6 @@ class turninplace():
  
 if __name__ == '__main__':
 	try:
-		GoStraight()
+		turninplace()
 	except:
 		rospy.loginfo("turninplace node terminated.")
