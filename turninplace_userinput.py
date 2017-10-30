@@ -23,7 +23,7 @@ class turninplace_userinput():
 	#desiredAngle = -1-1*1j # use complex math, 90+45 clockwise
 	#desiredAngle = 0-1*1j # use complex math, 90 clockwise
 	#desiredAngle = 0+1*1j # use complex math, 90 counterclockwise
-	# change desirgedAngle from complex to just requesting radians
+	# change desiredAngle from complex to just requesting radians
 	desiredAngle = 3*pi/2
 	def __init__(self):
 		# initiliaze
@@ -81,8 +81,12 @@ class turninplace_userinput():
 		else:
 			error = self.zeroAngle/(current**2)
 			self.thetaError = phase(error) # radians from 0, -pi to pi
+
+		if mag(self.thetaError) < 0.05:
+			rospy.loginfo("Angle currently is %f. Input desiredAngle: "%(self.thetaError))
+			self.desiredAngle = input()
 		
-		rospy.loginfo("theta = %f"%(self.thetaError))
+		#rospy.loginfo("theta = %f"%(self.thetaError))
 
 	def shutdown(self):
 		# stop turtlebot
