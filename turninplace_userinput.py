@@ -25,7 +25,7 @@ class turninplace_userinput():
 	#desiredAngle = 0-1*1j # use complex math, 90 clockwise
 	#desiredAngle = 0+1*1j # use complex math, 90 counterclockwise
 	# change desiredAngle from complex to just requesting radians
-	desiredAngle = 0
+	desiredAngle = 0.0
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('turninplace_userinput', anonymous=False)
@@ -70,6 +70,9 @@ class turninplace_userinput():
 			self.cmd_vel.publish(move_cmd)
 			# wait for 0.1 seconds (10 HZ) and publish again
 			r.sleep()
+			if fabs(self.thetaError) < 0.05:
+				rospy.loginfo("Angle currently is %f. Input desiredAngle: "%(self.desiredAngle))
+				self.desiredAngle = float(input())
 
 	def Orientation(self,data):
 		qz = data.pose.pose.orientation.z
@@ -84,9 +87,6 @@ class turninplace_userinput():
 			error = self.zeroAngle/(current**2)
 			self.thetaError = phase(error) # radians from 0, -pi to pi
 
-		if fabs(self.thetaError) < 0.05:
-			rospy.loginfo("Angle currently is %f. Input desiredAngle: "%(self.desiredAngle))
-			self.desiredAngle = float(input())
 		
 		#rospy.loginfo("theta = %f"%(self.thetaError))
 
