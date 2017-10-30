@@ -24,7 +24,7 @@ class turninplace_userinput():
 	#desiredAngle = 0-1*1j # use complex math, 90 clockwise
 	#desiredAngle = 0+1*1j # use complex math, 90 counterclockwise
 	# change desirgedAngle from complex to just requesting radians
-	desiredAngle = pi/2
+	desiredAngle = 3*pi/2
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('turninplace_userinput', anonymous=False)
