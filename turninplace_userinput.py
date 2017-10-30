@@ -82,7 +82,7 @@ class turninplace_userinput():
 			error = self.zeroAngle/(current**2)
 			self.thetaError = phase(error) # radians from 0, -pi to pi
 
-		if mag(self.thetaError) < 0.05:
+		if fabs(self.thetaError) < 0.05:
 			rospy.loginfo("Angle currently is %f. Input desiredAngle: "%(self.thetaError))
 			self.desiredAngle = input()
 		
