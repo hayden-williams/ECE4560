@@ -78,8 +78,9 @@ class turninplace_userinput():
 		if self.zeroAngle == 10:
 			self.zeroAngle = (qw + qz*1j)**2
 			# at this point, zeroAngle is our 0
-			self.zeroAngle = self.zeroAngle*(cos(self.desiredAngle)+sin(self.desiredAngle)*1j)
+			#self.zeroAngle = self.zeroAngle*(cos(self.desiredAngle)+sin(self.desiredAngle)*1j)
 		else:
+			self.zeroAngle = self.zeroAngle*(cos(self.desiredAngle)+sin(self.desiredAngle)*1j)
 			error = self.zeroAngle/(current**2)
 			self.thetaError = phase(error) # radians from 0, -pi to pi
 
