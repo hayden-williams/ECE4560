@@ -26,6 +26,7 @@ class turninplace_userinput():
 	#desiredAngle = 0+1*1j # use complex math, 90 counterclockwise
 	# change desiredAngle from complex to just requesting radians
 	desiredAngle = 0.0
+	count = 0
 	def __init__(self):
 		# initiliaze
 		rospy.init_node('turninplace_userinput', anonymous=False)
@@ -48,7 +49,7 @@ class turninplace_userinput():
 		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
 	 
 		#TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
-		r = rospy.Rate(20);
+		r = rospy.Rate(20); #use to be 10
 
 		# Twist is a datatype for velocity
 		move_cmd = Twist()
@@ -60,7 +61,8 @@ class turninplace_userinput():
 		
 		# as long as you haven't ctrl + c keeping doing...
 		while not rospy.is_shutdown():
-		
+
+			self.count = self.count + 1
 			if self.zeroAngle == 10:
 				move_cmd.linear.x = 0.0
 				move_cmd.angular.z = 0
@@ -70,9 +72,10 @@ class turninplace_userinput():
 				move_cmd.angular.z = self.kTurn*self.thetaError
 			# publish the velocity
 			self.cmd_vel.publish(move_cmd)
-			if fabs(self.thetaError) < 0.05:
+			if fabs(self.thetaError) < 0.05 and self.count%10 ==0:
 				rospy.loginfo("Angle currently is %f. Input desiredAngle: "%(self.desiredAngle))
 				self.desiredAngle = float(input())
+				self.count =0
 			# wait for 0.1 seconds (10 HZ) and publish again
 			r.sleep()
 			
