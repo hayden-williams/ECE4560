@@ -64,15 +64,18 @@ class turninplace_userinput():
 			if self.zeroAngle == 10:
 				move_cmd.linear.x = 0.0
 				move_cmd.angular.z = 0
+			elif fabs(self.thetaError) < 0.05:
+				move_cmd.angular.z = 0
 			else:
 				move_cmd.angular.z = self.kTurn*self.thetaError
 			# publish the velocity
 			self.cmd_vel.publish(move_cmd)
-			# wait for 0.1 seconds (10 HZ) and publish again
-			r.sleep()
 			if fabs(self.thetaError) < 0.05:
 				rospy.loginfo("Angle currently is %f. Input desiredAngle: "%(self.desiredAngle))
 				self.desiredAngle = float(input())
+			# wait for 0.1 seconds (10 HZ) and publish again
+			r.sleep()
+			
 
 	def Orientation(self,data):
 		qz = data.pose.pose.orientation.z
