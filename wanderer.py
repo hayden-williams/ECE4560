@@ -67,7 +67,7 @@ class Scan_msg():
 
 		self.reset_sect()
 
-	def for_callback(self,laserscan):
+	def for_callback(self,laserScan):
 		'''Passes laserscan onto function sort which gives the sect 
 		variables the proper values.  Then the movement function is run 
 		with the class sect variables as parameters.
