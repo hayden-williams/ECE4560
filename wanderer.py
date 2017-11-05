@@ -40,9 +40,9 @@ class Scan_msg:
 		entries = len(laserscan.ranges)
 		for entry in range(0,entries):
 			if 0.4 < laserscan.ranges[entry] < 0.75:
-			self.sect_1 = 1 if (0 < entry < entries/3) else 0 
-			self.sect_2 = 1 if (entries/3 < entry < entries/2) else 0
-			self.sect_3 = 1 if (entries/2 < entry < entries) else 0
+				self.sect_1 = 1 if (0 < entry < entries/3) else 0 
+				self.sect_2 = 1 if (entries/3 < entry < entries/2) else 0
+				self.sect_3 = 1 if (entries/2 < entry < entries) else 0
 		rospy.loginfo("sort complete,sect_1: " + str(self.sect_1) + " sect_2: " + str(self.sect_2) + " sect_3: " + str(self.sect_3))
 
 	def movement(self, sect1, sect2, sect3):
