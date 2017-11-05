@@ -86,7 +86,7 @@ def call_back(scanmsg):
 def listener():
 	'''Initializes node, creates subscriber, and states callback 
 	function.'''
-	rospy.init_node('navigation_sensors')
+	#rospy.init_node('navigation_sensors')
 	rospy.loginfo("Subscriber Starting")
 	sub = rospy.Subscriber('/scan', LaserScan, call_back)
 	rospy.spin()
