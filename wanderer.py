@@ -4,10 +4,11 @@
 
 #!/usr/bin/env python
 import rospy
+import roslib
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
 
-class Scan_msg:
+class Scan_msg():
 
 	
 	def __init__(self):
@@ -15,6 +16,8 @@ class Scan_msg:
 		The constructor creates a publisher, a twist message.
 		3 integer variables are created to keep track of where obstacles exist.
 		3 dictionaries are to keep track of the movement and log messages.'''
+		rospy.init_node('Scan_msg')
+		rospy.loginfo("__init__ called")
 		self.pub = rospy.Publisher('/cmd_vel_mux/input/navi',Twist)
 		self.msg = Twist()
 		self.sect_1 = 0
@@ -27,16 +30,18 @@ class Scan_msg:
 
 	def reset_sect(self):
 		'''Resets the below variables before each new scan message is read'''
+		rospy.loginfo("reset_sect called")
 		self.sect_1 = 0
 		self.sect_2 = 0
 		self.sect_3 = 0
 
-	def sort(self, laserscan):
+	def sort(self, laserScan):
 		'''Goes through 'ranges' array in laserscan message and determines 
 		where obstacles are located. The class variables sect_1, sect_2, 
 		and sect_3 are updated as either '0' (no obstacles within 0.7 m)
 		or '1' (obstacles within 0.7 m)
 		Parameter laserscan is a laserscan message.'''
+		rospy.loginfo("sort called")
 		entries = len(laserscan.ranges)
 		for entry in range(0,entries):
 			if 0.4 < laserscan.ranges[entry] < 0.75:
@@ -51,6 +56,7 @@ class Scan_msg:
 		variable sect and then	set the appropriate angular and linear 
 		velocities, and log messages.
 		These are published and the sect variables are reset.'''
+		rospy.loginfo("movement called")
 		sect = int(str(self.sect_1) + str(self.sect_2) + str(self.sect_3))
 		rospy.loginfo("Sect = " + str(sect)) 
 		
@@ -66,6 +72,7 @@ class Scan_msg:
 		variables the proper values.  Then the movement function is run 
 		with the class sect variables as parameters.
 		Parameter laserscan is received from callback function.'''
+		rospy.loginfo("for_callback called")
 		self.sort(laserscan)
 		self.movement(self.sect_1, self.sect_2, self.sect_3)
 	
@@ -73,6 +80,7 @@ class Scan_msg:
 def call_back(scanmsg):
 	'''Passes laser scan message to for_callback function of sub_obj.
 	Parameter scanmsg is laserscan message.'''
+	rospy.loginfo("call_back called")
 	sub_obj.for_callback(scanmsg)
 
 def listener():
