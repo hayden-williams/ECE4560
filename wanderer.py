@@ -18,6 +18,8 @@ class Scan_msg():
 		3 dictionaries are to keep track of the movement and log messages.'''
 		rospy.init_node('Scan_msg')
 		rospy.loginfo("__init__ called")
+		#TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
+		r = rospy.Rate(10);
 		self.pub = rospy.Publisher('/cmd_vel_mux/input/navi',Twist)
 		self.msg = Twist()
 		self.sect_1 = 0
@@ -26,6 +28,10 @@ class Scan_msg():
 		self.ang = {0:0,001:-1.2,10:-1.2,11:-1.2,100:1.5,101:1.0,110:1.0,111:1.2}
 		self.fwd = {0:.25,1:0,10:0,11:0,100:0.1,101:0,110:0,111:0}
 		self.dbgmsg = {0:'Move forward',1:'Veer right',10:'Veer right',11:'Veer right',100:'Veer left',101:'Veer left',110:'Veer left',111:'Veer right'}
+
+		while 1==1:
+
+			r.sleep()
 
 
 	def reset_sect(self):
