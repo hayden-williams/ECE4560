@@ -58,7 +58,7 @@ class Scan_msg():
 				self.sect_3 = 1 if (2*entries/5 < entry < 3*entries/5) else 0
 				self.sect_4 = 1 if (3*entries/5 < entry < 4*entries/5) else 0
 				self.sect_5 = 1 if (4*entries/5 < entry < entries) else 0
-		rospy.loginfo("sort complete,sect_1: " + str(self.sect_1) + " sect_2: " + str(self.sect_2) + " sect_3: " + str(self.sect_3) + " sect_4: " + str(self.sect_4) + " sect_5: " + str(self.sect_5))
+		#rospy.loginfo("sort complete,sect_1: " + str(self.sect_1) + " sect_2: " + str(self.sect_2) + " sect_3: " + str(self.sect_3) + " sect_4: " + str(self.sect_4) + " sect_5: " + str(self.sect_5))
 
 	def movement(self, sect1, sect2, sect3, sect4, sect5):
 		'''Uses the information known about the obstacles to move robot.
@@ -67,11 +67,11 @@ class Scan_msg():
 		velocities, and log messages.
 		These are published and the sect variables are reset.'''
 		sect = int(str(self.sect_1) + str(self.sect_2) + str(self.sect_3) + str(self.sect_4) + str(self.sect_5))
-		rospy.loginfo("Sect = " + str(sect)) 
+		#rospy.loginfo("Sect = " + str(sect)) 
 		
 		self.msg.angular.z = self.ang[sect]
 		self.msg.linear.x = self.fwd[sect]
-		rospy.loginfo(self.dbgmsg[sect])
+		#rospy.loginfo(self.dbgmsg[sect])
 		self.pub.publish(self.msg)
 
 		self.reset_sect()
