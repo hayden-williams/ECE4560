@@ -16,7 +16,7 @@ class Scan_msg():
 		The constructor creates a publisher, a twist message.
 		3 integer variables are created to keep track of where obstacles exist.
 		3 dictionaries are to keep track of the movement and log messages.'''
-		rospy.init_node('navigation_sensors',, anonymous=False)
+		rospy.init_node('navigation_sensors', anonymous=False)
 		#TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
 		#r = rospy.Rate(10);
 		self.pub = rospy.Publisher('/cmd_vel_mux/input/navi',Twist)
