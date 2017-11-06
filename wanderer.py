@@ -9,11 +9,13 @@ from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
 from kobuki_msgs.msg import BumperEvent
 from kobuki_msgs.msg import WheelDropEvent
+from kobuki_msgs.msg import CliffEvent
 
 class Scan_msg():
 
 	bumperHit = 0
 	wheelDropHit = 0
+	cliffHit = 0
 
 	def __init__(self):
 		'''Initializes an object of this class.
@@ -71,7 +73,7 @@ class Scan_msg():
 		sect = int(str(self.sect_1) + str(self.sect_2) + str(self.sect_3) + str(self.sect_4) + str(self.sect_5))
 		#rospy.loginfo("Sect = " + str(sect)) 
 
-		if self.wheelDropHit ==0 and self.bumperHit ==0:
+		if self.wheelDropHit ==0 and self.bumperHit ==0 and self.cliffHit == 0:
 			self.msg.angular.z = self.ang[sect]
 			self.msg.linear.x = self.fwd[sect]
 		else:
@@ -106,6 +108,14 @@ class Scan_msg():
 			self.wheelDropHit = 0
 			  
 		rospy.loginfo("Wheel")
+
+	def for_CliffEventCallback(self,data):
+		if ( data.state == 1 ) :
+			self.cliffHit = 1
+		else:
+			self.cliffHit = 0
+			  
+		rospy.loginfo("Cliff")
 	
 
 def call_back(scanmsg):
@@ -120,6 +130,9 @@ def BumperEventCallback(data):
 def WheelDropEventCallback(data):
 	sub_obj.for_WheelDropEventCallback(data)
 
+def CliffEventCallback(data):
+	sub_obj.for_CliffEventCallback(data)
+
 def listener():
 	'''Initializes node, creates subscriber, and states callback 
 	function.'''
@@ -127,6 +140,7 @@ def listener():
 	rospy.loginfo("Subscriber Starting")
 	rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,BumperEventCallback)
 	rospy.Subscriber("/mobile_base/events/wheel_drop",WheelDropEvent,WheelDropEventCallback)
+	rospy.Subscriber("/mobile_base/events/cliff",CliffEvent,CliffEventCallback)
 	sub = rospy.Subscriber('/scan', LaserScan, call_back)
 	
 
