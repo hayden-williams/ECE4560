@@ -32,8 +32,8 @@ class Scan_msg():
 		self.fwd = {0:.25,1:0,10:0,11:0,100:0,101:0,110:0,111:0,1000:0,1001:0,1010:0,1011:0,1100:0,1101:0,1110:0,1111:0,10000:0,10001:0,10010:0,10011:0,10100:0,10101:0,10110:0,10111:0,11000:0,11001:0,11010:0,11011:0,11100:0,11101:0,11110:0,11111:0}
 		self.dbgmsg = {0:'Move forward',1:'Veer left',10:'Veer left',11:'Veer left',100:'Veer right',101:'Veer left',110:'Veer left',111:'Veer right',1000:'Veer right',1001:'Veer right',1010:'Veer right',1011:'Veer right',1100:'Veer right',1101:'Veer right',1110:'Veer right',1111:'Veer right',10000:'Veer right',10001:'Veer right',10010:'Veer right',10011:'Veer right',10100:'Veer right',10101:'Veer right',10110:'Veer right',10111:'Veer right',11000:'Veer right',11001:'Veer right',11010:'Veer right',11011:'Veer right',11100:'Veer right',11101:'Veer right',11110:'Veer right',11111:'Veer right'}
 
-		rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
-		rospy.Subscriber("/mobile_base/events/wheel_drop",WheelDropEvent,self.WheelDropEventCallback)
+		#rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
+		#rospy.Subscriber("/mobile_base/events/wheel_drop",WheelDropEvent,self.WheelDropEventCallback)
 
 
 	def reset_sect(self):
@@ -84,14 +84,14 @@ class Scan_msg():
 		self.sort(laserscan)
 		self.movement(self.sect_1, self.sect_2, self.sect_3, self.sect_4, self.sect_5)
 
-	def BumperEventCallback(self,data):
+	def for_BumperEventCallback(self,data):
 		if ( data.state == BumperEvent.PRESSED ) :
 			self.msg.angular.z = 0
 			self.msg.linear.x = 0
 		
 		rospy.loginfo("Bumper")
 
-	def WheelDropEventCallback(self,data):
+	def for_WheelDropEventCallback(self,data):
 		if ( data.state == WheelDropEvent.DROPPED ) :
 			self.msg.angular.z = 0
 			self.msg.linear.x = 0
@@ -105,12 +105,20 @@ def call_back(scanmsg):
 	rospy.loginfo("call_back")
 	sub_obj.for_callback(scanmsg)
 
+def BumperEventCallback(data):
+	sub_obj.for_BumperEventCallback(data)
+
+def WheelDropEventCallback(data):
+	sub_obj.for_WheelDropEventCallback(data)
+
 def listener():
 	'''Initializes node, creates subscriber, and states callback 
 	function.'''
 	#rospy.init_node('navigation_sensors')
 	rospy.loginfo("Subscriber Starting")
 	sub = rospy.Subscriber('/scan', LaserScan, call_back)
+	rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,BumperEventCallback)
+	rospy.Subscriber("/mobile_base/events/wheel_drop",WheelDropEvent,WheelDropEventCallback)
 
 	#sub = rospy.Subscriber('/scan', LaserScan, call_back)
 	#sub = rospy.Subscriber('/mobile_base/sensors/bumper_pointcloud', LaserScan, call_back, queue_size=1)
