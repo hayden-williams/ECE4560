@@ -16,8 +16,7 @@ class Scan_msg():
 		The constructor creates a publisher, a twist message.
 		3 integer variables are created to keep track of where obstacles exist.
 		3 dictionaries are to keep track of the movement and log messages.'''
-		rospy.init_node('Scan_msg')
-		rospy.loginfo("__init__ called")
+		rospy.init_node('navigation_sensors')
 		#TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
 		r = rospy.Rate(10);
 		self.pub = rospy.Publisher('/cmd_vel_mux/input/navi',Twist)
@@ -36,7 +35,6 @@ class Scan_msg():
 
 	def reset_sect(self):
 		'''Resets the below variables before each new scan message is read'''
-		rospy.loginfo("reset_sect called")
 		self.sect_1 = 0
 		self.sect_2 = 0
 		self.sect_3 = 0
@@ -47,13 +45,12 @@ class Scan_msg():
 		and sect_3 are updated as either '0' (no obstacles within 0.7 m)
 		or '1' (obstacles within 0.7 m)
 		Parameter laserscan is a laserscan message.'''
-		rospy.loginfo("sort called")
 		entries = len(laserscan.ranges)
 		for entry in range(0,entries):
 			if 0.4 < laserscan.ranges[entry] < 0.75:
 				self.sect_1 = 1 if (0 < entry < entries/3) else 0 
-				self.sect_2 = 1 if (entries/3 < entry < entries/2) else 0
-				self.sect_3 = 1 if (entries/2 < entry < entries) else 0
+				self.sect_2 = 1 if (entries/3 < entry < 2*entries/3) else 0
+				self.sect_3 = 1 if (2*entries/3 < entry < entries) else 0
 		rospy.loginfo("sort complete,sect_1: " + str(self.sect_1) + " sect_2: " + str(self.sect_2) + " sect_3: " + str(self.sect_3))
 
 	def movement(self, sect1, sect2, sect3):
@@ -62,7 +59,6 @@ class Scan_msg():
 		variable sect and then	set the appropriate angular and linear 
 		velocities, and log messages.
 		These are published and the sect variables are reset.'''
-		rospy.loginfo("movement called")
 		sect = int(str(self.sect_1) + str(self.sect_2) + str(self.sect_3))
 		rospy.loginfo("Sect = " + str(sect)) 
 		
@@ -78,7 +74,6 @@ class Scan_msg():
 		variables the proper values.  Then the movement function is run 
 		with the class sect variables as parameters.
 		Parameter laserscan is received from callback function.'''
-		rospy.loginfo("for_callback called")
 		self.sort(laserscan)
 		self.movement(self.sect_1, self.sect_2, self.sect_3)
 	
@@ -86,16 +81,14 @@ class Scan_msg():
 def call_back(scanmsg):
 	'''Passes laser scan message to for_callback function of sub_obj.
 	Parameter scanmsg is laserscan message.'''
-	rospy.loginfo("call_back called")
 	sub_obj.for_callback(scanmsg)
 
 def listener():
 	'''Initializes node, creates subscriber, and states callback 
 	function.'''
 	#rospy.init_node('navigation_sensors')
-	rospy.loginfo("Subscriber Starting")
 	rospy.Subscriber('/scan', LaserScan, call_back)
-	rospy.loginfo("Subscriber After")
+
 	#sub = rospy.Subscriber('/scan', LaserScan, call_back)
 	#sub = rospy.Subscriber('/mobile_base/sensors/bumper_pointcloud', LaserScan, call_back, queue_size=1)
 	rospy.spin()
