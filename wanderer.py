@@ -12,7 +12,9 @@ from kobuki_msgs.msg import WheelDropEvent
 
 class Scan_msg():
 
-	
+	bumperHit = 0
+	wheelDropHit = 0
+
 	def __init__(self):
 		'''Initializes an object of this class.
 		The constructor creates a publisher, a twist message.
@@ -68,9 +70,14 @@ class Scan_msg():
 		These are published and the sect variables are reset.'''
 		sect = int(str(self.sect_1) + str(self.sect_2) + str(self.sect_3) + str(self.sect_4) + str(self.sect_5))
 		#rospy.loginfo("Sect = " + str(sect)) 
-		
-		self.msg.angular.z = self.ang[sect]
-		self.msg.linear.x = self.fwd[sect]
+
+		if self.wheelDropHit ==0 and self.bumperHit ==0:
+			self.msg.angular.z = self.ang[sect]
+			self.msg.linear.x = self.fwd[sect]
+		else:
+			self.msg.angular.z = 0
+			self.msg.linear.x = 0
+
 		#rospy.loginfo(self.dbgmsg[sect])
 		self.pub.publish(self.msg)
 
@@ -86,15 +93,17 @@ class Scan_msg():
 
 	def for_BumperEventCallback(self,data):
 		if ( data.state == BumperEvent.PRESSED ) :
-			self.msg.angular.z = 0
-			self.msg.linear.x = 0
+			self.bumperHit = 1
+		else:
+			self.bumperHit = 0
 		
 		rospy.loginfo("Bumper")
 
 	def for_WheelDropEventCallback(self,data):
 		if ( data.state == WheelDropEvent.DROPPED ) :
-			self.msg.angular.z = 0
-			self.msg.linear.x = 0
+			self.wheelDropHit = 1
+		else:
+			self.wheelDropHit = 0
 			  
 		rospy.loginfo("Wheel")
 	
@@ -102,7 +111,7 @@ class Scan_msg():
 def call_back(scanmsg):
 	'''Passes laser scan message to for_callback function of sub_obj.
 	Parameter scanmsg is laserscan message.'''
-	rospy.loginfo("call_back")
+	#rospy.loginfo("call_back")
 	sub_obj.for_callback(scanmsg)
 
 def BumperEventCallback(data):
