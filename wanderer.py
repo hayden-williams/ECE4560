@@ -94,8 +94,8 @@ def listener():
 	function.'''
 	#rospy.init_node('navigation_sensors')
 	rospy.loginfo("Subscriber Starting")
-	#sub = rospy.Subscriber('/scan', LaserScan, call_back, queue_size=1)
-	sub = rospy.Subscriber('/mobile_base/sensors/bumper_pointcloud', LaserScan, call_back, queue_size=1)
+	sub = rospy.Subscriber('/scan', LaserScan, call_back, queue_size=1)
+	#sub = rospy.Subscriber('/mobile_base/sensors/bumper_pointcloud', LaserScan, call_back, queue_size=1)
 	rospy.spin()
 
 if __name__ == "__main__":
