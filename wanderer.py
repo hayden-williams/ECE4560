@@ -41,7 +41,7 @@ class Scan_msg():
 		self.sect_2 = 0
 		self.sect_3 = 0
 
-	def sort(self, laserScan):
+	def sort(self, laserscan):
 		'''Goes through 'ranges' array in laserscan message and determines 
 		where obstacles are located. The class variables sect_1, sect_2, 
 		and sect_3 are updated as either '0' (no obstacles within 0.7 m)
@@ -73,7 +73,7 @@ class Scan_msg():
 
 		self.reset_sect()
 
-	def for_callback(self,laserScan):
+	def for_callback(self,laserscan):
 		'''Passes laserscan onto function sort which gives the sect 
 		variables the proper values.  Then the movement function is run 
 		with the class sect variables as parameters.
@@ -94,7 +94,8 @@ def listener():
 	function.'''
 	#rospy.init_node('navigation_sensors')
 	rospy.loginfo("Subscriber Starting")
-	sub = rospy.Subscriber('/scan', LaserScan, call_back, queue_size=1)
+	rospy.Subscriber('/scan', LaserScan, call_back)
+	#sub = rospy.Subscriber('/scan', LaserScan, call_back)
 	#sub = rospy.Subscriber('/mobile_base/sensors/bumper_pointcloud', LaserScan, call_back, queue_size=1)
 	rospy.spin()
 
