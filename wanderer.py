@@ -18,7 +18,7 @@ class Scan_msg():
 		3 dictionaries are to keep track of the movement and log messages.'''
 		rospy.init_node('navigation_sensors')
 		#TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
-		r = rospy.Rate(10);
+		#r = rospy.Rate(10);
 		self.pub = rospy.Publisher('/cmd_vel_mux/input/navi',Twist)
 		self.msg = Twist()
 		self.sect_1 = 0
