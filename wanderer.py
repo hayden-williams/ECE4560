@@ -116,9 +116,10 @@ def listener():
 	function.'''
 	#rospy.init_node('navigation_sensors')
 	rospy.loginfo("Subscriber Starting")
-	sub = rospy.Subscriber('/scan', LaserScan, call_back)
 	rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,BumperEventCallback)
 	rospy.Subscriber("/mobile_base/events/wheel_drop",WheelDropEvent,WheelDropEventCallback)
+	sub = rospy.Subscriber('/scan', LaserScan, call_back)
+	
 
 	#sub = rospy.Subscriber('/scan', LaserScan, call_back)
 	#sub = rospy.Subscriber('/mobile_base/sensors/bumper_pointcloud', LaserScan, call_back, queue_size=1)
