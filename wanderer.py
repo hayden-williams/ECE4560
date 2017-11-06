@@ -29,9 +29,9 @@ class Scan_msg():
 		self.fwd = {0:.25,1:0,10:0,11:0,100:0.1,101:0,110:0,111:0}
 		self.dbgmsg = {0:'Move forward',1:'Veer right',10:'Veer right',11:'Veer right',100:'Veer left',101:'Veer left',110:'Veer left',111:'Veer right'}
 
-		while not rospy.is_shutdown():
+		#while not rospy.is_shutdown():
 
-			r.sleep()
+			#r.sleep()
 
 
 	def reset_sect(self):
