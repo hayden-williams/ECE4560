@@ -11,11 +11,11 @@ class image_converter:
 
   def __init__(self):
     self.bridge = CvBridge()
-    self.image_sub = rospy.Subscriber("/camera/depth_registered/image_raw",Image,self.callback)
+    self.image_sub = rospy.Subscriber("/camera/rgb/image_raw",Image,self.callback)
 
   def callback(self,data):
     try:
-        cv_image = self.bridge.imgmsg_to_cv2(data, "mono16")
+        cv_image = self.bridge.imgmsg_to_cv2(data, "rgb8")
         cv2.imshow("depth_camera_msg.jpg", cv_image)
         print "image saved!"
     except CvBridgeError, e:
