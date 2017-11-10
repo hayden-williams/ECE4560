@@ -18,7 +18,7 @@ class image_converter:
 	def callback(self,data):
 		try:
 				cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
-				cv2.imshow("color_camera_msg.jpg", cv_image)
+				#cv2.imshow("color_camera_msg.jpg", cv_image)
 				cv2.waitKey(1)
 				#print "image saved!"
 
