@@ -20,7 +20,7 @@ class image_converter:
 				cv2.imshow("depth_camera_msg.jpg", cv_image)
 				print "image saved!"
 
-def main(args):
+def main():
 	ic = image_converter()
 	rospy.init_node('image_converter', anonymous=True)
 	try:
@@ -29,4 +29,4 @@ def main(args):
 		print "Shutting down"
 
 if __name__ == '__main__':
-	main(sys.argv)
+	main()
