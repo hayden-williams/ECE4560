@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 import roslib
-roslib.load_manifest('store_stereo_image')
+#roslib.load_manifest('store_stereo_image')
 import sys 
 import rospy
-import cv
 from std_msgs.msg import String
 from sensor_msgs.msg import Image
-from cv_bridge import CvBridge, CvBridgeError
+import cv_bridge
+import cv2
 
 class image_converter:
 
@@ -17,7 +17,7 @@ class image_converter:
   def callback(self,data):
     try:
         cv_image = self.bridge.imgmsg_to_cv(data, "mono8")
-        cv.imshow("depth_camera_msg.jpg", cv_image)
+        cv2.imshow("depth_camera_msg.jpg", cv_image)
         print "image saved!"
     except CvBridgeError, e:
       print e
