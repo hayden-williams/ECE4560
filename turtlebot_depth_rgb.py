@@ -27,11 +27,11 @@ class image_converter:
 
 	def callback2(self,data):
 		try:
-				print '32FC1: !!!!'
+				print "32FC1: !!!!"
 				depth_image = self.bridge.imgmsg_to_cv2(data, "32FC1")
 				print depth_image
 
-				print 'mono16: !!!!'
+				print "mono16: !!!!"
 				depth_image = self.bridge.imgmsg_to_cv2(data, "mono16")
 				print depth_image
 
