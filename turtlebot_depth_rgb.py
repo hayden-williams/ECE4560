@@ -13,7 +13,7 @@ class image_converter:
 	def __init__(self):
 		self.bridge = CvBridge()
 		self.image_sub = rospy.Subscriber("/camera/rgb/image_raw",Image,self.callback)
-		self.image_sub2 = rospy.Subscriber("/camera/depth_registered/image_raw",Image,self.callback2)
+		self.image_sub2 = rospy.Subscriber("/camera/depth/image",Image,self.callback2)
 
 	def callback(self,data):
 		try:
