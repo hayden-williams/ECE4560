@@ -8,7 +8,7 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 
 class image_converter:
-	
+
 	count = 0
 
 	def __init__(self):
@@ -19,9 +19,9 @@ class image_converter:
 		try:
 				cv_image = self.bridge.imgmsg_to_cv2(data, "mono8")
 				cv2.imshow("depth_camera_msg.jpg", cv_image)
-				if count==0:
+				if self.count==0:
 					cv2.waitKey(3)
-					count=1
+					self.count=1
 				#cv2.waitKey(1)
 				print "image saved!"
 
