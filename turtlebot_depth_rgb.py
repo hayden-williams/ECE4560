@@ -55,12 +55,4 @@ def main(args):
 		print "Shutting down"
 
 if __name__ == '__main__':
-		main(sys.argv)print '32FC1: !!!!'
-
-		print '32FC1: !!!!'
-				depth_image = self.bridge.imgmsg_to_cv2(data, "32FC1")
-				print depth_image
-
-				print '32FC1: !!!!'
-				depth_image = self.bridge.imgmsg_to_cv2(data, "32FC1")
-				print depth_image
+		main(sys.argv)
