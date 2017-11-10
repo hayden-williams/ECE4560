@@ -31,8 +31,8 @@ class image_converter:
 				depth_image = self.bridge.imgmsg_to_cv2(data, "32FC1")
 				print depth_image
 
-				print "mono16: !!!!"
-				depth_image = self.bridge.imgmsg_to_cv2(data, "mono16")
+				print "16UC1: !!!!"
+				depth_image = self.bridge.imgmsg_to_cv2(data, "16UC1")
 				print depth_image
 
 				# print('[0,0] ' + str(float(depth_image)/1000) + ' millimetres.')
