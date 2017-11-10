@@ -5,8 +5,8 @@ import sys
 import rospy
 from std_msgs.msg import String
 from sensor_msgs.msg import Image
-import cv_bridge
-import cv2
+from cv_bridge import *
+from cv2 import *
 
 class image_converter:
 
@@ -19,8 +19,6 @@ class image_converter:
         cv_image = self.bridge.imgmsg_to_cv(data, "mono8")
         cv2.imshow("depth_camera_msg.jpg", cv_image)
         print "image saved!"
-    except CvBridgeError, e:
-      print e
 
 def main(args):
   ic = image_converter()
