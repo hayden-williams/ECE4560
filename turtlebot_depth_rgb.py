@@ -15,7 +15,7 @@ class image_converter:
 
   def callback(self,data):
     try:
-        cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+        cv_image = self.bridge.imgmsg_to_cv2(data, "mono16")
         cv.SaveImage("depth_camera_msg.jpg", cv_image)
         print "image saved!"
     except CvBridgeError, e:
