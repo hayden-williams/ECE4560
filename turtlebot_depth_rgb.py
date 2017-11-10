@@ -27,7 +27,7 @@ class image_converter:
 
 	def callback2(self,data):
 		try:
-				depth_image = self.bridge.imgmsg_to_cv2(data, "32FC1")
+				depth_image = self.bridge.imgmsg_to_cv2(data, "mono8")
 				#depth_array = array(depth_image, dtype=float32)
 				#cv2.normalize(depth_image, depth_image, 0, 1, cv2.NORM_MINMAX)
 				cv2.imshow("depth_camera_msg.jpg", depth_image)
