@@ -17,6 +17,7 @@ class image_converter:
     try:
         cv_image = self.bridge.imgmsg_to_cv2(data, "mono8")
         cv2.imshow("depth_camera_msg.jpg", cv_image)
+        cv2.waitKey(3)
         print "image saved!"
 
     except CvBridgeError, e:
