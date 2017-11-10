@@ -27,9 +27,15 @@ class image_converter:
 
 	def callback2(self,data):
 		try:
-				depth_image = self.bridge.imgmsg_to_cv2(data, "16UC1")
+				print '32FC1: !!!!'
+				depth_image = self.bridge.imgmsg_to_cv2(data, "32FC1")
 				print depth_image
-				print('[0,0] ' + str(float(depth_image)/1000) + ' millimetres.')
+
+				print 'mono16: !!!!'
+				depth_image = self.bridge.imgmsg_to_cv2(data, "mono16")
+				print depth_image
+
+				# print('[0,0] ' + str(float(depth_image)/1000) + ' millimetres.')
 				#depth_array = array(depth_image, dtype=float32)
 				#cv2.normalize(depth_image, depth_image, 0, 1, cv2.NORM_MINMAX)
 				cv2.imshow("depth_camera_msg.jpg", depth_image)
@@ -49,4 +55,12 @@ def main(args):
 		print "Shutting down"
 
 if __name__ == '__main__':
-		main(sys.argv)
+		main(sys.argv)print '32FC1: !!!!'
+
+		print '32FC1: !!!!'
+				depth_image = self.bridge.imgmsg_to_cv2(data, "32FC1")
+				print depth_image
+
+				print '32FC1: !!!!'
+				depth_image = self.bridge.imgmsg_to_cv2(data, "32FC1")
+				print depth_image
