@@ -18,7 +18,7 @@ class image_converter:
         cv_image = self.bridge.imgmsg_to_cv2(data, "rgb8")
         cv2.imshow("depth_camera_msg.jpg", cv_image)
         print "image saved!"
-        wait(1)
+
     except CvBridgeError, e:
       print e
 
@@ -26,6 +26,7 @@ def main(args):
   ic = image_converter()
   rospy.init_node('image_converter', anonymous=True)
   try:
+  	
     rospy.spin()
   except KeyboardInterrupt:
     print "Shutting down"
