@@ -28,7 +28,7 @@ class image_converter:
 			#depth_array = array(depth_image, dtype=float32)
 			#cv2.normalize(depth_image, depth_image, 0, 1, cv2.NORM_MINMAX)
 			cv2.imshow("depth_camera_msg.jpg", depth_image)
-			cv2.waitKey(1)
+			cv2.waitKey(3)
 			#print "image saved!"
 
 		except CvBridgeError, e:
