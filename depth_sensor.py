@@ -15,7 +15,7 @@ class image_converter:
 
 	def __init__(self):
 		self.bridge = CvBridge()
-		self.image_sub2 = rospy.Subscriber("/camera/depth/image_raw",Image,self.callback)
+		self.image_sub2 = rospy.Subscriber("/camera/depth/image",Image,self.callback)
 
 	def callback(self,data):
 		try:
@@ -26,8 +26,8 @@ class image_converter:
 
 			# print('[0,0] ' + str(float(depth_image)/1000) + ' millimetres.')
 			#depth_image = array(depth_image, dtype=float32)
-			depth_image = float(depth_image)
-			cv2.normalize(depth_image, depth_image, 0, 1, cv2.NORM_MINMAX)
+			#depth_image = float(depth_image)
+			#cv2.normalize(depth_image, depth_image, 0, 1, cv2.NORM_MINMAX)
 			cv2.imshow("depth_camera_msg", depth_image)
 			cv2.waitKey(3)
 			#print "image saved!"
