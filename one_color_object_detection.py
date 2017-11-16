@@ -24,10 +24,10 @@ class image_converter:
 				cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
 
 				lower_orange = np.array([240,100,0])
-    			upper_orange = np.array([255,200,200])
-    			mask = cv2.inRange(hsv, lower_orange, upper_orange)
-    			res = cv2.bitwise_and(cv_image,cv_image, mask= mask)
-    			cv2.imshow('res',res)
+				upper_orange = np.array([255,200,200])
+				mask = cv2.inRange(hsv, lower_orange, upper_orange)
+				res = cv2.bitwise_and(cv_image,cv_image, mask= mask)
+				cv2.imshow('res',res)
 
 				#cv2.imshow("color_camera_msg.jpg", cv_image)
 				cv2.waitKey(5)
