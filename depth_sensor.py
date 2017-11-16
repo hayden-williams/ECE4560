@@ -20,7 +20,7 @@ class image_converter:
 	def callback(self,data):
 		try:
 			print "hello from callback"
-			depth_image = self.bridge.imgmsg_to_cv2(data, "16UC1")
+			depth_image = self.bridge.imgmsg_to_cv2(data, "passthrough")
 			print depth_image
 
 
