@@ -33,7 +33,7 @@ class image_converter:
 				cv2.imshow('res',res)
 
 				#cv2.imshow("color_camera_msg.jpg", cv_image)
-				cv2.waitKey(1)
+				cv2.waitKey(5)
 				#print "image saved!"
 
 		except CvBridgeError, e:
