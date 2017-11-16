@@ -29,7 +29,7 @@ class image_converter:
 				mask = cv2.inRange(hsv, lower_orange, upper_orange)
 				res = cv2.bitwise_and(cv_image,cv_image, mask= mask)
 				cv2.imshow('mask',mask)
-				print mask
+				print sum(mask)
 				#cv2.imshow('res',res)
 
 				#cv2.imshow("color_camera_msg.jpg", cv_image)
