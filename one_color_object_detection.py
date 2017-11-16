@@ -22,6 +22,7 @@ class image_converter:
 	def callback(self,data):
 		try:
 				cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+				hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
 
 				lower_orange = np.array([240,100,0])
 				upper_orange = np.array([255,200,200])
