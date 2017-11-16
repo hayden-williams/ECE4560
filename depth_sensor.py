@@ -25,7 +25,8 @@ class image_converter:
 
 
 			# print('[0,0] ' + str(float(depth_image)/1000) + ' millimetres.')
-			depth_image = array(depth_image, dtype=float32)
+			#depth_image = array(depth_image, dtype=float32)
+			depth_image = float(depth_image)
 			cv2.normalize(depth_image, depth_image, 0, 1, cv2.NORM_MINMAX)
 			cv2.imshow("depth_camera_msg", depth_image)
 			cv2.waitKey(3)
