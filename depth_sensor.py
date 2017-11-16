@@ -30,7 +30,7 @@ class image_converter:
 
 	def callback2(self,data):
 		try:
-				depth_image = self.bridge.imgmsg_to_cv2(data, "mono16")
+				depth_image = self.bridge.imgmsg_to_cv2(data, "16UC1")
 
 
 				# print('[0,0] ' + str(float(depth_image)/1000) + ' millimetres.')
