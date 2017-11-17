@@ -13,37 +13,17 @@ class image_converter:
 	def __init__(self):
 		self.bridge = CvBridge()
 		self.image_sub = rospy.Subscriber("/camera/rgb/image_raw",Image,self.callback)
-		self.image_sub2 = rospy.Subscriber("/camera/depth/image",Image,self.callback2)
 
 	def callback(self,data):
 		try:
 				cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
-				#cv2.imshow("color_camera_msg.jpg", cv_image)
+				cv2.imshow("color_camera_msg.jpg", cv_image)
 				cv2.waitKey(1)
 				#print "image saved!"
 
 		except CvBridgeError, e:
 			print e
 
-	def callback2(self,data):
-		try:
-				print "32FC1: !!!!"
-				depth_image = self.bridge.imgmsg_to_cv2(data, "32FC1")
-				print depth_image
-
-				print "16UC1: !!!!"
-				depth_image = self.bridge.imgmsg_to_cv2(data, "16UC1")
-				print depth_image
-
-				# print('[0,0] ' + str(float(depth_image)/1000) + ' millimetres.')
-				#depth_array = array(depth_image, dtype=float32)
-				#cv2.normalize(depth_image, depth_image, 0, 1, cv2.NORM_MINMAX)
-				cv2.imshow("depth_camera_msg.jpg", depth_image)
-				cv2.waitKey(1)
-				#print "image saved!"
-
-		except CvBridgeError, e:
-			print e
 
 def main(args):
 	ic = image_converter()
