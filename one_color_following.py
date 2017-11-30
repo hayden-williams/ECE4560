@@ -43,7 +43,7 @@ class image_converter:
 
 
 				# Convert BGR to GReyscale
-				grey = cv2.cvtColor(self.output, cv2.COLOR_BGR2GRAY)
+				grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 
 				ret,thresh = cv2.threshold(grey,127,255,0)
