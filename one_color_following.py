@@ -1,7 +1,7 @@
 # Stephen Williams and Edgardo Marchand
-# Created 16 Nov 2017
+# Created 30 Nov 2017
 
-# Homework 11
+# Homework 12
 #!/usr/bin/env python
 import roslib
 import sys 
@@ -25,7 +25,7 @@ class image_converter:
 				hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
 
 				lower_orange = np.array([0,10,170], dtype = "uint8") #bgr
-				upper_orange = np.array([120,130,255], dtype = "uint8")
+				upper_orange = np.array([75,130,255], dtype = "uint8")
 				mask = cv2.inRange(hsv, lower_orange, upper_orange)
 				res = cv2.bitwise_and(cv_image,cv_image, mask= mask)
 				#cv2.imshow('mask',mask)
