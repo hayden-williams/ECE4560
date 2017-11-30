@@ -70,7 +70,7 @@ class image_converter:
 				
 				self.cmd_vel.publish(self.move_cmd)
 
-				r.sleep()
+				self.r.sleep()
 
 
 				#cv2.imshow('mask',mask)
