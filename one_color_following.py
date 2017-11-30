@@ -18,6 +18,7 @@ class image_converter:
 	setup =10
 
 	def __init__(self):
+		rospy.init_node('image_converter', anonymous=True)
 		self.bridge = CvBridge()
 		self.image_sub = rospy.Subscriber("/camera/rgb/image_color",Image,self.callback)
 		self.pub = rospy.Publisher('/cmd_vel_mux/input/navi',Twist)
@@ -90,7 +91,7 @@ class image_converter:
 	
 def main(args):
 	ic = image_converter()
-	rospy.init_node('image_converter', anonymous=True)
+	#rospy.init_node('image_converter', anonymous=True)
 	try:
 
 		rospy.spin()
