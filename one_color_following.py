@@ -68,6 +68,7 @@ class image_converter:
 						self.move_cmd.linear.x = 0.2
 						self.move_cmd.angular.z = K*dx
 				
+				rospy.loginfo("in callback")
 				self.cmd_vel.publish(self.move_cmd)
 
 				self.r.sleep()
