@@ -21,8 +21,8 @@ class image_converter:
 		rospy.init_node('image_converter', anonymous=True)
 		self.bridge = CvBridge()
 		self.image_sub = rospy.Subscriber("/camera/rgb/image_color",Image,self.callback)
-		self.pub = rospy.Publisher('/cmd_vel_mux/input/navi',Twist)
-		self.msg = Twist()
+		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
+		self.move_cmd = Twist()
 
 		r = rospy.Rate(10)
 
@@ -62,11 +62,11 @@ class image_converter:
 					dx = cx - width/2 # +ve move right, -ve move left
 
 					if self.setup == 10:
-						move_cmd.linear.x = 0.0
-						move_cmd.angular.z = 0
+						self.move_cmd.linear.x = 0.0
+						self.move_cmd.angular.z = 0
 					else:
-						move_cmd.linear.x = 0.2
-						move_cmd.angular.z = K*dx
+						self.move_cmd.linear.x = 0.2
+						self.move_cmd.angular.z = K*dx
 				
 				self.cmd_vel.publish(self.move_cmd)
 
