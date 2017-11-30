@@ -62,9 +62,14 @@ class image_converter:
 					#cv2.circle(image,centerOfObject,10,(0,255,0),-1)
 					rospy.loginfo("in if statement in callback")
 
-					dx = cx - width/2 # +ve move right, -ve move left
+					dx = cx - width/2 # +ve move left, -ve move right?
+					dy = cy - height/2
 
-					self.move_cmd.linear.x = 0.2
+					if dy >= 0:
+						self.move_cmd.linear.x = 0.2
+					else:
+						self.move_cmd.linear.x = -0.2
+					
 					self.move_cmd.angular.z = K*(-1)*dx
 				
 				rospy.loginfo("in callback")
