@@ -58,6 +58,7 @@ class image_converter:
 					cy = int(M['m01']/M['m00'])
 					centerOfObject = (int(cx),int(cy))
 					#cv2.circle(image,centerOfObject,10,(0,255,0),-1)
+					rospy.loginfo("in if statement in callback")
 
 					dx = cx - width/2 # +ve move right, -ve move left
 
