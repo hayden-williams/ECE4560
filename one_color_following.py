@@ -50,7 +50,7 @@ class image_converter:
 				contours,hierarchy = cv2.findContours(thresh, 1, 2)
 				cnt = contours[0]
 
-				M = cv2.moments(self.mask)
+				M = cv2.moments(mask)
 				height, width, channels = image.shape #grey scale channel is 1, rgb is 3
 
 				if ( M['m00'] > 0):
