@@ -42,6 +42,8 @@ class image_converter:
 
 				cv2.imshow('image',image)
 				cv2.waitKey(5)
+
+				'''
 				# Convert BGR to GReyscale
 				grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -69,7 +71,7 @@ class image_converter:
 				self.cmd_vel.publish(self.move_cmd)
 
 				self.r.sleep()
-
+				'''
 
 				#cv2.imshow('mask',mask)
 
