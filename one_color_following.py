@@ -28,7 +28,7 @@ class image_converter:
 	def callback(self,data):
 		try:
 
-				K = 0.01
+				K = 0.005
 
 
 				cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
