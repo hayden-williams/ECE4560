@@ -15,7 +15,6 @@ from geometry_msgs.msg import Twist
 
 class image_converter:
 	# detecting orange
-	setup =10
 
 	def __init__(self):
 		rospy.init_node('image_converter', anonymous=True)
@@ -62,12 +61,8 @@ class image_converter:
 
 					dx = cx - width/2 # +ve move right, -ve move left
 
-					if self.setup == 10:
-						self.move_cmd.linear.x = 0.0
-						self.move_cmd.angular.z = 0
-					else:
-						self.move_cmd.linear.x = 0.2
-						self.move_cmd.angular.z = K*dx
+					self.move_cmd.linear.x = 0.2
+					self.move_cmd.angular.z = K*dx
 				
 				rospy.loginfo("in callback")
 				self.cmd_vel.publish(self.move_cmd)
