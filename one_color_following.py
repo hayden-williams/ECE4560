@@ -40,7 +40,8 @@ class image_converter:
 				mask = cv2.inRange(cv_image, lower_orange, upper_orange)
 				image = cv2.bitwise_and(cv_image,cv_image, mask= mask)
 
-
+				cv2.imshow('image',image)
+				cv2.waitKey(5)
 				# Convert BGR to GReyscale
 				grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -76,7 +77,7 @@ class image_converter:
 				#ret,thresh = cv2.threshold(grey,127,255,0)
 
 
-				cv2.imshow('image',image)
+				
 
 				#cv2.imshow("color_camera_msg.jpg", cv_image)
 				#cv2.waitKey(3)
