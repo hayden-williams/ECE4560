@@ -65,11 +65,7 @@ class image_converter:
 					dx = cx - width/2 # +ve move left, -ve move right?
 					dy = cy - height/2
 
-					if dy >= 0:
-						self.move_cmd.linear.x = 0.2
-					else:
-						self.move_cmd.linear.x = -0.2
-					
+					self.move_cmd.linear.x = 0.005*dy
 					self.move_cmd.angular.z = K*(-1)*dx
 				
 				rospy.loginfo("in callback")
