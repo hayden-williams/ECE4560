@@ -76,7 +76,7 @@ class image_converter:
 				#ret,thresh = cv2.threshold(grey,127,255,0)
 
 
-				#cv2.imshow('image',image)
+				cv2.imshow('image',image)
 
 				#cv2.imshow("color_camera_msg.jpg", cv_image)
 				#cv2.waitKey(3)
