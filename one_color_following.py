@@ -24,8 +24,8 @@ class image_converter:
 				cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
 				hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
 
-				lower_orange = np.array([0,10,200]) #bgr
-				upper_orange = np.array([120,130,255])
+				lower_orange = np.array([0,10,200], dtype = "uint8") #bgr
+				upper_orange = np.array([120,130,255], dtype = "uint8")
 				mask = cv2.inRange(hsv, lower_orange, upper_orange)
 				res = cv2.bitwise_and(cv_image,cv_image, mask= mask)
 				#cv2.imshow('mask',mask)
