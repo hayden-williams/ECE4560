@@ -40,10 +40,10 @@ class image_converter:
 				mask = cv2.inRange(cv_image, lower_orange, upper_orange)
 				image = cv2.bitwise_and(cv_image,cv_image, mask= mask)
 
-				cv2.imshow('image',image)
-				cv2.waitKey(5)
+				#cv2.imshow('image',image)
+				#cv2.waitKey(5)
 
-				'''
+				
 				# Convert BGR to GReyscale
 				grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -64,14 +64,14 @@ class image_converter:
 
 					dx = cx - width/2 # +ve move right, -ve move left
 
-					self.move_cmd.linear.x = 0.2
+					self.move_cmd.linear.x = 0.0
 					self.move_cmd.angular.z = K*dx
 				
 				rospy.loginfo("in callback")
 				self.cmd_vel.publish(self.move_cmd)
 
 				self.r.sleep()
-				'''
+				
 
 				#cv2.imshow('mask',mask)
 
