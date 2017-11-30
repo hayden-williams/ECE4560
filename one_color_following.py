@@ -28,13 +28,17 @@ class image_converter:
 				lower_orange = np.array([0,10,170], dtype = "uint8") #bgr
 				upper_orange = np.array([120,130,255], dtype = "uint8")
 				mask = cv2.inRange(cv_image, lower_orange, upper_orange)
-				res = cv2.bitwise_and(cv_image,cv_image, mask= mask)
+				image = cv2.bitwise_and(cv_image,cv_image, mask= mask)
 				#cv2.imshow('mask',mask)
 
-				cv2.imshow('res',res)
+				#greyImage = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+				#ret,thresh = cv2.threshold(grey,127,255,0)
+
+
+				cv2.imshow('image',image)
 
 				#cv2.imshow("color_camera_msg.jpg", cv_image)
-				cv2.waitKey(5)
+				cv2.waitKey(3)
 				#print "image saved!"
 
 		except CvBridgeError, e:
