@@ -24,7 +24,7 @@ class image_converter:
 		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
 		self.move_cmd = Twist()
 
-		r = rospy.Rate(10)
+		self.r = rospy.Rate(10)
 
 	def callback(self,data):
 		try:
