@@ -74,7 +74,7 @@ class image_converter:
 					self.move_cmd.angular.z = K*(-1)*dx
 
 					#distance = self.depth_image(cx,cy)
-					print self.depth_image
+					print self.depth_image(cx,cy)
 					print "hello"
 					self.move_cmd.linear.x = 0
 				
