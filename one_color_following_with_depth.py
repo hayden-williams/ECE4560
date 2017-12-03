@@ -104,6 +104,7 @@ class image_converter:
 	def callback_depth(self,data):
 		# process depth data
 		if self.mask != 10:
+			print "hellp from callback_depth"
 			# mask contains the actual mask if it does not equal 10
 			self.depth_image = self.bridge.imgmsg_to_cv2(data, "passthrough")
 			#self.depth_image = cv2.bitwise_and(cv_image,cv_image, mask= self.mask)
