@@ -74,6 +74,7 @@ class image_converter:
 					if self.depth_image != 10:
 						#distance = self.depth_image(cx,cy)
 						print self.depth_image
+						print "hello"
 						self.move_cmd.linear.x = 0
 
 					else:
