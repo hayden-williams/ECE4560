@@ -15,7 +15,9 @@ from geometry_msgs.msg import Twist
 
 class image_converter:
 	# detecting orange
-	
+	max_stop = 1000 # above this go forward
+	min_stop = 800 # below this go backwards
+	no_below = 400 # stop if below this
 
 	def __init__(self):
 		rospy.init_node('image_converter', anonymous=True)
@@ -33,6 +35,7 @@ class image_converter:
 		try:
 
 				K = 0.005
+				Kx = 1
 
 
 				cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
@@ -74,9 +77,18 @@ class image_converter:
 					self.move_cmd.angular.z = K*(-1)*dx
 
 					#distance = self.depth_image(cx,cy)
-					print self.depth_image[cx,cy]
-					print "hello"
-					self.move_cmd.linear.x = 0
+					#print self.depth_image[cx,cy]
+					#print "hello"
+					if self.depth_image[cx,cy] <= self.no_below:
+						self.move_cmd.linear.x = 0
+					elif self.depth_image[cx,cy] < self.min_stop:
+						self.move_cmd.linear.x = -0.1*Kx
+					elif self.depth_image[cx,cy] < self.max_stop:
+						self.move_cmd.linear.x = 0
+					elif self.depth_image[cx,cy] >= self.max_stop:
+						self.move_cmd.linear.x = 0.1*Kx
+					else:
+						self.move_cmd.linear.x = 0
 				
 				#rospy.loginfo("in callback")
 				self.cmd_vel.publish(self.move_cmd)
