@@ -16,7 +16,6 @@ from geometry_msgs.msg import Twist
 class image_converter:
 	# detecting orange
 	
-	depth_image = 10
 
 	def __init__(self):
 		rospy.init_node('image_converter', anonymous=True)
@@ -71,7 +70,7 @@ class image_converter:
 
 					#self.move_cmd.linear.x = 0.0015*(-1)*dy
 					self.move_cmd.angular.z = K*(-1)*dx
-					
+
 					#distance = self.depth_image(cx,cy)
 					print self.depth_image
 					print "hello"
