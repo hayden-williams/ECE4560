@@ -15,7 +15,7 @@ from geometry_msgs.msg import Twist
 
 class image_converter:
 	# detecting orange
-	mask = 10
+	
 	depth_image = 10
 
 	def __init__(self):
@@ -71,14 +71,11 @@ class image_converter:
 
 					#self.move_cmd.linear.x = 0.0015*(-1)*dy
 					self.move_cmd.angular.z = K*(-1)*dx
-					if self.depth_image != 10:
-						#distance = self.depth_image(cx,cy)
-						print self.depth_image
-						print "hello"
-						self.move_cmd.linear.x = 0
-
-					else:
-						self.move_cmd.linear.x = 0
+					
+					#distance = self.depth_image(cx,cy)
+					print self.depth_image
+					print "hello"
+					self.move_cmd.linear.x = 0
 				
 				#rospy.loginfo("in callback")
 				self.cmd_vel.publish(self.move_cmd)
@@ -103,11 +100,9 @@ class image_converter:
 
 	def callback_depth(self,data):
 		# process depth data
-		if self.mask != 10:
-			print "hellp from callback_depth"
-			# mask contains the actual mask if it does not equal 10
-			self.depth_image = self.bridge.imgmsg_to_cv2(data, "passthrough")
-			#self.depth_image = cv2.bitwise_and(cv_image,cv_image, mask= self.mask)
+		# mask contains the actual mask if it does not equal 10
+		self.depth_image = self.bridge.imgmsg_to_cv2(data, "passthrough")
+		#self.depth_image = cv2.bitwise_and(cv_image,cv_image, mask= self.mask)
 
 
 	
