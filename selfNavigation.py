@@ -98,7 +98,7 @@ class selfNavigation():
 				# do error corrections
 				print('entered goToUser')
 				
-				self.desiredAngle = (360-self.direction)*3.14159/180 # input degree convert to rad
+				self.desiredAngle = (360-self.direction)*3.14159265359/180 # input degree convert to rad
 				# using odometry for bearing
 				# IndoorAtlus East is 90, Odometry West is 90, Need to account for this
 				"""
