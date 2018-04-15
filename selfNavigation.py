@@ -112,7 +112,7 @@ class selfNavigation():
 				"""
 
 
-
+				print("after desiredAngle")
 				if (self.direction == 1000 or self.length == 0.0 or self.zeroAngle == 1000):
 					print('len = 0, dir = 1000')
 					move_cmd.linear.x = 0.0
